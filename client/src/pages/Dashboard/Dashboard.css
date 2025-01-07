@@ -1,0 +1,201 @@
+.dashboard {
+  height: 100vh;
+  background-color: rgb(193, 190, 255);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Roboto', sans-serif;
+  padding: 20px;
+  overflow-y: auto; /* Added to handle overflow */
+}
+
+.dashboard h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #0f0f0f;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* Habit Form */
+.habit-form {
+  width: 100%;
+  max-width: 800px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.habit-form h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #0f0f0f;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.habit-form input,
+.habit-form textarea {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.habit-form input:focus,
+.habit-form textarea:focus {
+  border: 1px solid rebeccapurple;
+  background-color: #f9f8ff;
+  outline: none;
+}
+
+.habit-form button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #938eef;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.habit-form button:hover {
+  background-color: rebeccapurple;
+  color: white;
+}
+
+/* Dashboard Content Section */
+.dashboard-content {
+  width: 100%;
+  max-width: 800px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-content h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #0f0f0f;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.habit-category {
+  margin-bottom: 30px;
+  padding: 10px;
+  background-color: #f9f8ff;
+  border-radius: 10px;
+}
+
+.habit-category h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: rebeccapurple;
+  margin-bottom: 15px;
+  text-transform: capitalize;
+}
+
+.habit-item {
+  background-color: #ececff;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.habit-item p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #0f0f0f;
+}
+
+/* Checkoff and Delete Buttons */
+.habit-item button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.habit-item button.checkoff {
+  background-color: #4caf50; /* Green for checkoff */
+  color: white;
+}
+
+.habit-item button.checkoff:hover {
+  background-color: #45a049;
+}
+
+.habit-item button.delete {
+  background-color: #f44336; /* Red for delete */
+  color: white;
+  margin-left: 10px;
+}
+
+.habit-item button.delete:hover {
+  background-color: #d32f2f;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .habit-form,
+  .dashboard-content {
+    width: 100%;
+  }
+
+  .habit-category h3 {
+    font-size: 1.3rem;
+  }
+
+  .habit-item {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .habit-form h3 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .habit-form,
+  .dashboard-content {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .habit-category h3 {
+    font-size: 1.2rem;
+  }
+
+  .habit-item {
+    padding: 10px;
+    font-size: 0.8rem;
+  }
+
+  .habit-form h3 {
+    font-size: 1.2rem;
+  }
+
+  .habit-form button {
+    font-size: 0.9rem;
+  }
+}

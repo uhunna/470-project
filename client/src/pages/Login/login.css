@@ -1,0 +1,103 @@
+.login {
+  height: 100vh;
+  background-color: rgb(193, 190, 255);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  width: 50%;
+  display: flex;
+  background-color: white;
+  border-radius: 10px;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+.right {
+  flex: 1;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Ensures all elements are centered */
+  justify-content: flex-start; /* Align items at the top */
+  gap: 20px; /* Adds spacing between elements */
+}
+
+.right h1 {
+  color: #555;
+  font-size: 2rem;
+  text-align: center;
+  margin: 0; /* Removes default margin */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers inputs and button */
+  width: 100%;
+  max-width: 400px; /* Restricts form width */
+  gap: 15px; /* Adds spacing between form elements */
+}
+
+input {
+  width: 100%; /* Stretches inputs to form width */
+  padding: 15px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  border: 1px solid rebeccapurple;
+  background-color: #f9f8ff;
+  outline: none;
+}
+
+button {
+  width: 100%; /* Matches input width */
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #938eef;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: rebeccapurple;
+}
+
+p {
+  font-size: 14px;
+  color: #555;
+  text-align: center;
+  margin-top: 20px; /* Adds space above text */
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: -10px;
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    width: 90%;
+    min-height: auto;
+  }
+
+  .right {
+    flex: none;
+    width: 100%;
+    padding: 20px;
+  }
+
+  form {
+    gap: 15px;
+  }
+}

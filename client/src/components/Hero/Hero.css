@@ -1,0 +1,98 @@
+.hero {
+    margin: 0px 120px;
+    margin-top: 270px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.home_one {
+    position: absolute;
+    top: 4.3rem;
+    left: 5rem;
+    text-align: left;
+    padding: 2rem;
+    max-width: 50%;
+    font-family: 'Lobster', cursive;
+}
+
+.home_one h2 {
+    font-size: 2.8rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    font-family: 'Lobster', cursive;
+}
+
+.home_one p {
+    font-size: 1.7rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    color: #0f0f0f;
+}
+
+.hero-text {
+    color: #0a0909;
+    font-family: 'Lobster', cursive;
+    font-size: 50px; /* Reduced font size */
+    font-weight: 400;
+    line-height: 65px; /* Reduced line height */
+    position: absolute;
+    bottom: 3rem; /* Adjusted position for shorter text */
+    left: 2rem;
+    margin-bottom: 10px;
+}
+
+.hero-dot-play {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.hero-dots {
+    display: flex;
+    align-items: center;
+    gap: 23px;
+    list-style: none;
+}
+
+.hero-dot {
+    width: 15px;
+    height: 15px;
+    background: #000000;
+    border-radius: 7.5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.hero-dot.orange {
+    background: orangered;
+}
+
+.hero-dot:hover {
+    background: #ff4500;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .hero-text {
+        font-size: 35px; /* Smaller font for tablets */
+        line-height: 50px; /* Adjusted line height */
+        left: 1rem;
+        bottom: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-text {
+        font-size: 25px; /* Even smaller for mobile devices */
+        line-height: 35px; /* Adjusted line height */
+        text-align: center;
+        left: 0;
+        right: 0;
+        bottom: 1rem;
+    }
+}

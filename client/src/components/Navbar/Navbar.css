@@ -1,0 +1,123 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #4b4559;
+  padding: 1rem 2rem;
+  overflow: visible; /* Ensures no clipping of dropdowns */
+}
+
+.nav-logo {
+  height: 80px;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 25px;
+}
+
+.navbar-dropdown {
+  position: relative;
+}
+
+.dropdown-btn {
+  color: white;
+  text-decoration: none;
+  font-size: 25px;
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.dropdown-btn:focus {
+  outline: none;
+}
+
+.dropdown-btn:hover {
+  color: #ccc;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #4b4559;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  display: none;
+  flex-direction: column;
+  padding: 0.5rem;
+  z-index: 1000;
+  min-width: 150px; /* Ensures a consistent width */
+  max-width: calc(100vw - 20px); /* Prevents overflow */
+  overflow: hidden; /* Prevents content from spilling out */
+}
+
+.dropdown-menu a {
+  color: white;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  font-size: 20px;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
+  white-space: nowrap; /* Prevents text wrapping */
+}
+
+.dropdown-menu a:hover {
+  background-color: #635c77;
+}
+
+.navbar-dropdown:hover .dropdown-menu {
+  display: flex;
+}
+
+.user-display {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4caf50, #8bc34a);
+  border: none;
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.user-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.username {
+  font-size: 18px;
+  font-weight: 500;
+  color: white;
+  background-color: rgba(75, 69, 89, 0.8);
+  padding: 5px 10px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Adjust dropdown positioning for smaller screens */
+@media (max-width: 768px) {
+  .dropdown-menu {
+    left: auto; /* Reset default alignment */
+    right: 0; /* Align dropdown to the right */
+    width: auto; /* Allow dropdown to resize */
+  }
+}
