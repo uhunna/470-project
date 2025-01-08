@@ -8,48 +8,51 @@ const Analytics = () => {
   const [weeklyData, setWeeklyData] = useState([]);
   const [monthlyData, setMonthlyData] = useState([]);
   const [badges, setBadges] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    // Fetch weekly analytics
-    axios
-      .get("http://localhost:8800/api/analytics/weekly?userId=1", {
-        withCredentials: true,
-      })
-      .then((res) => {
-        setWeeklyData(res.data);
-      })
-      .catch((err) => {
-        console.error("Error fetching weekly data:", err);
-      });
+    const fetchAnalytics = async () => {
+      try {
+        // Fetch weekly analytics
+        const weeklyRes = await axios.get("http://localhost:8800/api/analytics/weekly", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`, // Add token to header
+          },
+        });
+        setWeeklyData(weeklyRes.data);
 
-    // Fetch monthly analytics
-    axios
-      .get("http://localhost:8800/api/analytics/monthly?userId=1", {
-        withCredentials: true,
-      })
-      .then((res) => {
-        setMonthlyData(res.data);
-      })
-      .catch((err) => {
-        console.error("Error fetching monthly data:", err);
-      });
+        // Fetch monthly analytics
+        const monthlyRes = await axios.get("http://localhost:8800/api/analytics/monthly", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`, // Add token to header
+          },
+         // withCredentials: true,
+        });
+        setMonthlyData(monthlyRes.data);
 
-    // Fetch badges
-    axios
-      .get("http://localhost:8800/api/analytics/badges?userId=1", {
-        withCredentials: true,
-      })
-      .then((res) => {
-        setBadges(res.data);
-      })
-      .catch((err) => {
-        console.error("Error fetching badges:", err);
-      });
+        // Fetch badges
+        const badgesRes = await axios.get("http://localhost:8800/api/analytics/badges", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`, // Add token to header
+          },
+          //withCredentials: true,
+        });
+        setBadges(badgesRes.data);
+      } catch (err) {
+        console.error("Error fetching analytics data:", err);
+        setError("Failed to fetch analytics. Please try again later.");
+      }
+    };
+
+    fetchAnalytics();
   }, []);
 
   return (
     <div className="analytics-container">
       <h2>Analytics Dashboard</h2>
+
+      {error && <p className="error-message">{error}</p>}
+
       <div className="charts-wrapper">
         <div className="chart-section">
           <h3>Weekly Progress</h3>
@@ -65,11 +68,15 @@ const Analytics = () => {
       <div className="badges-section">
         <h3>Unlocked Badges</h3>
         <ul>
-          {badges.map((badge, idx) => (
-            <li key={idx}>
-              <strong>{badge.badge}</strong> — Awarded On: {badge.awardedOn}
-            </li>
-          ))}
+          {badges.length > 0 ? (
+            badges.map((badge, idx) => (
+              <li key={idx}>
+                <strong>{badge.badge}</strong> — Awarded On: {badge.awardedOn}
+              </li>
+            ))
+          ) : (
+            <p>No badges unlocked yet.</p>
+          )}
         </ul>
       </div>
     </div>
