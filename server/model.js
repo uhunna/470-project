@@ -53,7 +53,7 @@ const deleteHabit = (hid, user_id, callback = () => {}) => {
   });
 };
 
-// mark a habit as checked off
+// Mark a habit as checked off
 const checkOffHabit = (hid, dateCompleted, callback = () => {}) => {
   const query = "INSERT INTO daily_checklist (habit_id, date, is_completed) VALUES (?, ?, ?)";
   db.query(query, [hid, dateCompleted, true], (err, result) => {
@@ -65,7 +65,7 @@ const checkOffHabit = (hid, dateCompleted, callback = () => {}) => {
   });
 };
 
-// undo the habit check-off
+// Undo the habit check-off
 const undoHabitCheckOff = (hid, dateCompleted, callback = () => {}) => {
   const query = "DELETE FROM daily_checklist WHERE habit_id = ? AND date = ?";
   db.query(query, [hid, dateCompleted], (err, result) => {
@@ -77,7 +77,7 @@ const undoHabitCheckOff = (hid, dateCompleted, callback = () => {}) => {
   });
 };
 
-//check if the habit has already been checked off today
+// Check if the habit has already been checked off today
 const checkIfHabitCheckedOffToday = (hid, date, callback = () => {}) => {
   const query = "SELECT * FROM daily_checklist WHERE habit_id = ? AND date = ?";
   db.query(query, [hid, date], (err, results) => {
@@ -100,7 +100,6 @@ const addGoal = (habitId, streak, callback = () => {}) => {
     callback(null, { id: result.insertId, habitId, streak });
   });
 };
-
 module.exports = {
   addHabit,
   getHabitsByUserId,
