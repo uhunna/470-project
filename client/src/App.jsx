@@ -6,7 +6,9 @@ import Login from "./pages/Login/Login";
 import Registration from "./pages/Registration/Registration";
 import Notifications from "./pages/Notifications/notifications";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import Analytics from "./pages/Analytics/Analytics"; // Import the Analytics component
+import Analytics from "./pages/Analytics/Analytics";
+import Leaderboard from "./pages/leaderboard/leaderboard"; // Import the Leaderboard component
+
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -22,10 +24,12 @@ const App = () => {
         <Route path="/registration" element={<Registration />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/notifications" element={<Notifications />} />
-        <Route path="/analytics" element={<Analytics />} /> {/* Added Analytics route */}
+        <Route path="/analytics" element={<Analytics />} />
+        <Route path="/leaderboard" element={<Leaderboard />} /> {/* Added Leaderboard route */}
       </Routes>
     </Router>
   );
 };
 
 export default App;
+

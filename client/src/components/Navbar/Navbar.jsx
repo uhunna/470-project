@@ -51,6 +51,7 @@ const Navbar = () => {
               <Link to="/friends">Friends</Link>
               <Link to="/dashboard">Dashboard</Link>
               <Link to="/analytics">Analytics</Link>
+              <Link to="/leaderboard">Leaderboard</Link> {/* Added leaderboard link */}
             </div>
           )}
         </div>

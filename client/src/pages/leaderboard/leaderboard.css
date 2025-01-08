@@ -1,0 +1,53 @@
+.leaderboard-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 50px auto;
+    text-align: center;
+    background: #fefefe;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  .leaderboard-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #0b7cfe;
+  }
+  
+  .error-message {
+    color: red;
+    margin: 10px 0;
+  }
+  
+  .leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .leaderboard-table th,
+  .leaderboard-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .leaderboard-table th {
+    background-color: #4a90e2;
+    color: #fff;
+  }
+  
+  .leaderboard-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .leaderboard-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .medal-icon {
+    width: 30px;
+    height: 30px;
+  }
+  
