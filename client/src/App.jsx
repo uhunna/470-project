@@ -6,6 +6,7 @@ import Login from "./pages/Login/Login";
 import Registration from "./pages/Registration/Registration";
 import Notifications from "./pages/Notifications/notifications";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import Analytics from "./pages/Analytics/Analytics"; // Import the Analytics component
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -13,7 +14,7 @@ const App = () => {
   return (
     <Router>
       <Navbar />
-      <ToastContainer /> {}
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/challenges" element={<Challenges />} />
@@ -21,7 +22,7 @@ const App = () => {
         <Route path="/registration" element={<Registration />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/notifications" element={<Notifications />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/analytics" element={<Analytics />} /> {/* Added Analytics route */}
       </Routes>
     </Router>
   );

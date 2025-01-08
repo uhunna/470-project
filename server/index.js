@@ -2,12 +2,14 @@ const express = require("express");
 const authRoutes = require("./routes/auth.js");
 const userRoutes = require("./routes/user.js");
 const challengesRouter = require("./routes/challenges");
-const userChallengesRoute = require('./routes/userChallenges');
+const userChallengesRoutes = require("./routes/userChallenges"); // Made consistent
+const habitRoutes = require("./routes/habit.js");
+const analyticsRouter = require("./routes/analytics"); // Added analytics
 const cors = require("cors");
 const multer = require("multer");
 const cookieParser = require("cookie-parser");
 const cron = require("node-cron");
-const habitRoutes = require("./routes/habit.js");
+const { db } = require("./connect");
 
 const app = express();
 
@@ -27,6 +29,7 @@ app.use(
 
 app.use(cookieParser());
 
+// Multer file upload configuration
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "../client/public/upload");
@@ -36,8 +39,6 @@ const storage = multer.diskStorage({
   },
 });
 
-const userChallengeRoutes = require("./routes/userChallenges");
-
 const upload = multer({ storage: storage });
 
 app.post("/api/upload", upload.single("file"), (req, res) => {
@@ -45,19 +46,21 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
   res.status(200).json(file.filename);
 });
 
+// Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/challenges", challengesRouter);
-app.use('/api/userChallenges', userChallengesRoute);
+app.use("/api/userChallenges", userChallengesRoutes); // Made consistent
+app.use("/api/habit", habitRoutes);
+app.use("/api/analytics", analyticsRouter); // Added analytics
 
-
+// CRON job for incrementing points
 cron.schedule("0 0 * * *", () => {
   console.log("Running daily increment of points...");
   const incrementPointsQuery = `
     UPDATE user_challenges 
     SET point = point + 10
   `;
-
   db.query(incrementPointsQuery, (err, result) => {
     if (err) {
       console.error("Error incrementing points:", err);
@@ -67,9 +70,8 @@ cron.schedule("0 0 * * *", () => {
   });
 });
 
-
+// Start server
 app.listen(8800, () => {
-  console.log("API working!");
+  console.log("API working on port 8800!");
 });
 
-app.use("/api/habit", habitRoutes);
