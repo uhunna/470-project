@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { db } = require("../connect.js");
+const verifyToken = require("../middlewares/verifyToken.js"); // Import the middleware
 
 // GET all challenges
 router.get("/", (req, res) => {
@@ -17,15 +18,18 @@ router.get("/", (req, res) => {
 });
 
 // POST new challenge
-router.post("/", (req, res) => {
-  const { name, description, created_by } = req.body;
-
+router.post("/", verifyToken, (req, res) => {
+  const { name, description } = req.body;
+  const created_by = req.user.id
+  
   // Validate request body
-  if (!name || !description || !created_by) {
+  if (!name || !description) {
     return res
       .status(400)
-      .json({ error: "Name, description, and created_by are required." });
+      .json({ error: "Name and description are required." });
   }
+
+  ; // Extract user ID from verified token
 
   const insertQuery = `
     INSERT INTO challenge (name, description, created_by)

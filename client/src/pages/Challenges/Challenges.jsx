@@ -13,6 +13,7 @@ const Challenges = () => {
   const userId = sessionStorage.getItem("userId");
   const token = sessionStorage.getItem("token");
 
+  // Fetch challenges on component mount
   useEffect(() => {
     axios
       .get("http://localhost:8800/challenges", {
@@ -28,29 +29,41 @@ const Challenges = () => {
       });
   }, [token]);
 
+  // Handle joining a challenge
   const handleJoinChallenge = (challengeId) => {
+    if (!userId) {
+      alert("User not logged in. Please log in and try again.");
+      return;
+    }
+
+    if (!token) {
+      alert("Authorization token is missing. Please log in again.");
+      return;
+    }
+
     axios
       .post(
-        "http://localhost:8800/api/userChallenges",
+        "http://localhost:8800/api/userChallenges", // Corrected endpoint
         {
           cha_user_id: userId,
           challenge_id: challengeId,
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`, // Include token in the header
           },
         }
       )
-      .then((response) => {
+      .then(() => {
         alert("Challenge accepted successfully!");
       })
       .catch((error) => {
-        console.error("Error accepting challenge:", error.response || error);
+        console.error("Error accepting challenge:", error.response?.data || error);
         alert("Error accepting challenge.");
       });
   };
 
+  // Handle creating a challenge
   const handleCreateChallenge = async () => {
     if (newChallenge.name && newChallenge.description) {
       try {
@@ -59,7 +72,6 @@ const Challenges = () => {
           {
             name: newChallenge.name,
             description: newChallenge.description,
-            created_by: userId,
           },
           {
             headers: {
