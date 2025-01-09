@@ -1,6 +1,7 @@
 # 470-project
 
 HabitForge: Habit Tracking System
+
 This project is a full-stack web application that consists of habit tracking and productivity managing . It is designed to help users track their habits, earn points, and compete with others. Built using a React frontend, Express backend, and MySQL for data storage, it offers a smooth user experience and a variety of useful features.
 
 Features
