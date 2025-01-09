@@ -100,6 +100,23 @@ const Dashboard = () => {
     }
   };
 
+  const calculateProgress = (completed, goal) => {
+    return (completed / goal) * 100;
+  };
+
+  const renderProgressBar = (completed, goal) => {
+    const progress = calculateProgress(completed, goal);
+    return (
+      <div className="progress-bar-container">
+        <div
+          className="progress-bar"
+          style={{ width: `${progress}%` }}
+        ></div>
+        <div className="progress-bar-text">{progress === 100 ? "Goal Reached!" : `${completed}/${goal} days`}</div>
+      </div>
+    );
+  };
+
   return (
     <div className="dashboard">
       <ToastContainer />
@@ -156,7 +173,9 @@ const Dashboard = () => {
                   <div className="habit-details">
                     <p><strong>{habit.habit_name}</strong></p>
                     <p>{habit.description}</p>
+                    <p><strong>Streak: {habit.streak || 0}/{habit.goal} days completed</strong></p>
                   </div>
+                  {renderProgressBar(habit.streak || 0, habit.goal)}
                   <div className="habit-actions">
                     <button className="delete" onClick={() => handleDeleteHabit(habit.hid, category)}>Delete</button>
                     <button className="checkoff">Check Off</button>

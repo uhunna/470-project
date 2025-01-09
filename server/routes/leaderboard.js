@@ -6,5 +6,3 @@ const { getLeaderboard } = require("../controller/leaderboard.js");
 router.get("/", getLeaderboard);
 
 module.exports = router;
-
-

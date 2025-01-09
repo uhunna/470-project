@@ -7,9 +7,10 @@ const {
 
 const router = express.Router();
 
-// Routes for analytics
 router.get("/weekly", getWeeklyAnalytics);
+
 router.get("/monthly", getMonthlyAnalytics);
+
 router.get("/badges", getBadges);
 
 module.exports = router;

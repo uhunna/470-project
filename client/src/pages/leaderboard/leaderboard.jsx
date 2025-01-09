@@ -5,24 +5,9 @@ import silverMedal from "../../assets/medals/silver medal.png";
 import bronzeMedal from "../../assets/medals/bronze medal.png";
 
 const Leaderboard = () => {
-  // Hardcoded leaderboard data (Dummy Data)
-  const dummyLeaderboardData = [
-    { id: 1, username: "john_doe", name: "John Doe", total_points: 110 },
-    { id: 2, username: "jane_smith", name: "Jane Smith", total_points: 90 },
-    { id: 3, username: "mike_jones", name: "Mike Jones", total_points: 80 },
-    { id: 4, username: "lisa_white", name: "Lisa White", total_points: 70 },
-    { id: 5, username: "david_brown", name: "David Brown", total_points: 60 },
-    { id: 6, username: "emma_green", name: "Emma Green", total_points: 50 },
-    { id: 7, username: "lucas_gray", name: "Lucas Gray", total_points: 40 },
-    { id: 8, username: "sophia_black", name: "Sophia Black", total_points: 30 },
-    { id: 9, username: "oliver_blue", name: "Oliver Blue", total_points: 20 },
-    { id: 10, username: "mia_pink", name: "Mia Pink", total_points: 10 },
-  ];
-
-  const [leaderboard, setLeaderboard] = useState(dummyLeaderboardData);
+  const [leaderboard, setLeaderboard] = useState([]);
   const [error, setError] = useState(null);
 
-  // Motivational quotes
   const motivationalQuotes = [
     "Discipline is the bridge between goals and accomplishment.",
     "Small daily improvements are the key to staggering long-term results.",
@@ -37,14 +22,26 @@ const Leaderboard = () => {
   ];
 
   useEffect(() => {
+    const fetchLeaderboard = async () => {
+      try {
+        const response = await fetch("http://localhost:8060/leaderboard");
+        if (!response.ok) {
+          throw new Error("Failed to fetch leaderboard data.");
+        }
+        const data = await response.json();
+        setLeaderboard(data);
+      } catch (err) {
+        console.error("Error fetching leaderboard:", err.message);
+        setError("Could not load leaderboard. Try again later.");
+      }
+    };
+
     // Display a random motivational quote in an alert
     const randomQuote =
       motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)];
     alert(randomQuote);
 
-    // No need to fetch data as we are using dummy data
-    // You can later replace it with a fetch call when the backend is set up
-    setLeaderboard(dummyLeaderboardData);
+    fetchLeaderboard();
   }, []);
 
   const getMedalImage = (rank) => {
@@ -86,7 +83,7 @@ const Leaderboard = () => {
                   {medal && (
                     <img
                       src={medal}
-                      alt={`${rank} medal`}
+                      alt={'${rank} medal'}
                       className="medal-icon"
                     />
                   )}

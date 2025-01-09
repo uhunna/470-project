@@ -3,7 +3,7 @@ const { addHabit, deleteHabit, checkOffHabit, getHabitsByUserId } = require("../
 // Add a new habit
 const addHabitController = (req, res) => {
   const habitData = {
-    user_id: req.session.userId, // Use session to get user ID
+    user_id: 13,
     habit_name: req.body.habit_name,
     description: req.body.description,
     created_at: new Date(),

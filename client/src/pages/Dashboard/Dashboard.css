@@ -158,3 +158,28 @@
 .habit-item button.delete:hover {
   background-color: #d32f2f;
 }
+
+/* Progress Bar */
+.progress-bar-container {
+  width: 100%;
+  background-color: #f3f3f3;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.progress-bar {
+  height: 20px;
+  background-color: #4caf50;
+  border-radius: 5px;
+}
+
+.progress-bar-text {
+  text-align: center;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.progress-bar-container .goal-reached {
+  color: green;
+  font-weight: bold;
+}
