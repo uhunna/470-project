@@ -5,7 +5,8 @@ const challengesRouter = require("./routes/challenges");
 const userChallengesRoutes = require("./routes/userChallenges"); // Made consistent
 const habitRoutes = require("./routes/habit.js");
 const analyticsRouter = require("./routes/analytics"); // Added analytics
-const leaderboardRouter = require("./routes/leaderboard"); // Import the leaderboard router
+const leaderboardRouter = require("./routes/leaderboard"); 
+const friendRoutes = require("./routes/friends.js")
 const cors = require("cors");
 const multer = require("multer");
 const cookieParser = require("cookie-parser");
@@ -55,7 +56,7 @@ app.use("/api/userChallenges", userChallengesRoutes); // Made consistent
 app.use("/api/habit", habitRoutes);
 app.use("/api/analytics", analyticsRouter); // Added analytics
 app.use("/api/leaderboard", leaderboardRouter); // Add leaderboard route
-
+app.use("/api/friends", friendRoutes);
 // CRON job for incrementing points
 cron.schedule("0 0 * * *", () => {
   console.log("Running daily increment of points...");

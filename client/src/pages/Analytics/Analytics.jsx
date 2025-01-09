@@ -16,7 +16,7 @@ const Analytics = () => {
         // Fetch weekly analytics
         const weeklyRes = await axios.get("http://localhost:8800/api/analytics/weekly", {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`, // Add token to header
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`, // Get token from session storage
           },
         });
         setWeeklyData(weeklyRes.data);
@@ -24,18 +24,16 @@ const Analytics = () => {
         // Fetch monthly analytics
         const monthlyRes = await axios.get("http://localhost:8800/api/analytics/monthly", {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`, // Add token to header
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`, // Get token from session storage
           },
-         // withCredentials: true,
         });
         setMonthlyData(monthlyRes.data);
 
         // Fetch badges
         const badgesRes = await axios.get("http://localhost:8800/api/analytics/badges", {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`, // Add token to header
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`, // Get token from session storage
           },
-          //withCredentials: true,
         });
         setBadges(badgesRes.data);
       } catch (err) {

@@ -44,13 +44,14 @@ const login = (req, res) => {
     const { password, ...others } = data[0];
 
     res
-      .cookie("accessToken", token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "none",
-      })
-      .status(200)
-      .json({ token, user: others });
+   .cookie("accessToken", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+  })
+  .status(200)
+  .json({ token, user: others }); // Token is also sent in JSON
+
   });
 };
 
