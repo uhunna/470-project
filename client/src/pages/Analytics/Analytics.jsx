@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { WeeklyChart } from "../../components/Charts/WeeklyChart";
 import { MonthlyChart } from "../../components/Charts/MonthlyChart";
 import "./Analytics.css";
@@ -11,38 +10,31 @@ const Analytics = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchAnalytics = async () => {
-      try {
-        // Fetch weekly analytics
-        const weeklyRes = await axios.get("http://localhost:8800/api/analytics/weekly", {
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`, // Get token from session storage
-          },
-        });
-        setWeeklyData(weeklyRes.data);
+    // Hardcoded dummy data for testing
+    const dummyWeeklyData = [
+      { weekday: "Mon", completedCount: 2 },
+      { weekday: "Tue", completedCount: 1 },
+      { weekday: "Wed", completedCount: 3 },
+      { weekday: "Thu", completedCount: 0 },
+      { weekday: "Fri", completedCount: 4 },
+      { weekday: "Sat", completedCount: 1 },
+      { weekday: "Sun", completedCount: 3 },
+    ];
+    const dummyMonthlyData = [
+      { weekLabel: "Week 45", completedCount: 10 },
+      { weekLabel: "Week 46", completedCount: 15 },
+      { weekLabel: "Week 47", completedCount: 8 },
+      { weekLabel: "Week 48", completedCount: 20 },
+    ];
+    const dummyBadges = [
+      { badge: "Early Bird", awardedOn: "2024-12-01" },
+      { badge: "Consistency Champion", awardedOn: "2024-12-08" },
+    ];
 
-        // Fetch monthly analytics
-        const monthlyRes = await axios.get("http://localhost:8800/api/analytics/monthly", {
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`, // Get token from session storage
-          },
-        });
-        setMonthlyData(monthlyRes.data);
-
-        // Fetch badges
-        const badgesRes = await axios.get("http://localhost:8800/api/analytics/badges", {
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`, // Get token from session storage
-          },
-        });
-        setBadges(badgesRes.data);
-      } catch (err) {
-        console.error("Error fetching analytics data:", err);
-        setError("Failed to fetch analytics. Please try again later.");
-      }
-    };
-
-    fetchAnalytics();
+    // Set dummy data to state
+    setWeeklyData(dummyWeeklyData);
+    setMonthlyData(dummyMonthlyData);
+    setBadges(dummyBadges);
   }, []);
 
   return (
