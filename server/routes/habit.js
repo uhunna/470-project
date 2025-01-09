@@ -4,13 +4,20 @@ const {
   deleteHabitController,
   checkOffHabitController,
 } = require("../controller/habit.js");
-const verifyToken = require("../middlewares/verifyToken");
 
 const router = express.Router();
 
+// Middleware to ensure the user is authenticated
+router.use((req, res, next) => {
+  if (!req.session.userId) {
+    return res.status(401).json({ error: "Not authenticated" });
+  }
+  next();
+});
+
 // Route to fetch all habits for the logged-in user
-router.get("/", verifyToken, (req, res) => {
-  const user_id = req.user.id;
+router.get("/", (req, res) => {
+  const user_id = req.session.userId;
 
   const query = "SELECT * FROM habits WHERE user_id = ?";
   db.query(query, [user_id], (err, data) => {
@@ -20,12 +27,12 @@ router.get("/", verifyToken, (req, res) => {
 });
 
 // Add a habit
-router.post("/add", verifyToken, addHabitController);
+router.post("/add", addHabitController);
 
 // Delete a habit
-router.delete("/delete/:habit_id", verifyToken, deleteHabitController);
+router.delete("/delete/:habit_id", deleteHabitController);
 
 // Check off a habit
-router.post("/checkoff", verifyToken, checkOffHabitController);
+router.post("/checkoff", checkOffHabitController);
 
 module.exports = router;

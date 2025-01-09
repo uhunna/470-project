@@ -1,13 +1,14 @@
+/* General Dashboard Styling */
 .dashboard {
   height: 100vh;
   background-color: rgb(193, 190, 255);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* Changed to keep content at the top */
   font-family: 'Roboto', sans-serif;
   padding: 20px;
-  overflow-y: auto; /* Added to handle overflow */
+  overflow-y: auto; 
 }
 
 .dashboard h2 {
@@ -27,6 +28,8 @@
   padding: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
+  overflow-y: auto; /* Allow scrolling if content is large */
+  max-height: 500px; /* Set max-height for the form */
 }
 
 .habit-form h3 {
@@ -73,7 +76,7 @@
   color: white;
 }
 
-/* Dashboard Content Section */
+/* Habit Category and Items */
 .dashboard-content {
   width: 100%;
   max-width: 800px;
@@ -81,14 +84,8 @@
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.dashboard-content h3 {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #0f0f0f;
-  margin-bottom: 20px;
-  text-align: center;
+  max-height: 500px;
+  overflow-y: auto; 
 }
 
 .habit-category {
@@ -117,6 +114,15 @@
   font-family: 'Roboto', sans-serif;
 }
 
+.habit-item .habit-details {
+  flex: 1;
+}
+
+.habit-item .habit-actions {
+  display: flex;
+  gap: 10px;
+}
+
 .habit-item p {
   margin: 0;
   font-size: 1rem;
@@ -124,7 +130,7 @@
   color: #0f0f0f;
 }
 
-/* Checkoff and Delete Buttons */
+/* Button Styling */
 .habit-item button {
   padding: 8px 12px;
   border: none;
@@ -147,55 +153,8 @@
 .habit-item button.delete {
   background-color: #f44336; /* Red for delete */
   color: white;
-  margin-left: 10px;
 }
 
 .habit-item button.delete:hover {
   background-color: #d32f2f;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .habit-form,
-  .dashboard-content {
-    width: 100%;
-  }
-
-  .habit-category h3 {
-    font-size: 1.3rem;
-  }
-
-  .habit-item {
-    padding: 10px;
-    font-size: 0.9rem;
-  }
-
-  .habit-form h3 {
-    font-size: 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .habit-form,
-  .dashboard-content {
-    width: 100%;
-    padding: 15px;
-  }
-
-  .habit-category h3 {
-    font-size: 1.2rem;
-  }
-
-  .habit-item {
-    padding: 10px;
-    font-size: 0.8rem;
-  }
-
-  .habit-form h3 {
-    font-size: 1.2rem;
-  }
-
-  .habit-form button {
-    font-size: 0.9rem;
-  }
 }

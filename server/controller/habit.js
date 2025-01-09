@@ -1,10 +1,9 @@
-// controller/habit.js
 const { addHabit, deleteHabit, checkOffHabit, getHabitsByUserId } = require("../model.js");
 
 // Add a new habit
 const addHabitController = (req, res) => {
   const habitData = {
-    user_id: req.user.id,
+    user_id: req.session.userId, // Use session to get user ID
     habit_name: req.body.habit_name,
     description: req.body.description,
     created_at: new Date(),
@@ -20,7 +19,7 @@ const addHabitController = (req, res) => {
 // Delete a habit
 const deleteHabitController = (req, res) => {
   const habit_id = req.params.habit_id;
-  const user_id = req.user.id;
+  const user_id = req.session.userId; // Use session to get user ID
 
   deleteHabit(habit_id, user_id, (err, success) => {
     if (err) return res.status(500).json({ error: "Failed to delete habit." });
@@ -44,3 +43,4 @@ module.exports = {
   deleteHabitController,
   checkOffHabitController,
 };
+

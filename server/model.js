@@ -7,7 +7,6 @@ const addHabit = (habitData, callback = () => {}) => {
     habit_name,
     description,
     created_at,
-    habit_end,
     category = "Miscellaneous",
   } = habitData;
 
@@ -16,8 +15,8 @@ const addHabit = (habitData, callback = () => {}) => {
   }
 
   db.query(
-    "INSERT INTO habits (habit_name, user_id, description, created_at, habit_end, category) VALUES (?, ?, ?, ?, ?, ?)",
-    [habit_name, user_id, description, created_at, habit_end, category],
+    "INSERT INTO habits (habit_name, user_id, description, created_at, category) VALUES (?, ?, ?, ?, ?, ?)",
+    [habit_name, user_id, description, created_at, category],
     (err, result) => {
       if (err) {
         console.error("Error inserting habit:", err);

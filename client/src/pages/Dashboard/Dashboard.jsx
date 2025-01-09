@@ -15,19 +15,9 @@ const Dashboard = () => {
 
   useEffect(() => {
     const fetchHabits = async () => {
-      const token = localStorage.getItem("token");
-  
-      if (!token) {
-        toast.error("Authentication token is missing!", { position: "top-center" });
-        return;
-      }
-  
       try {
         const response = await axios.get("http://localhost:8800/api/habit", {
-          headers: {
-            Authorization: `Bearer ${token}`, // Add token here
-          },
-          withCredentials: true, // Include cookies if needed
+          withCredentials: true, // Include cookies for session authentication
         });
         const habitsByCategory = response.data.reduce((acc, habit) => {
           acc[habit.category] = acc[habit.category] || [];
@@ -36,48 +26,33 @@ const Dashboard = () => {
         }, {});
         setHabits(habitsByCategory);
       } catch (err) {
-        console.error(err); // Log the error details
+        console.error(err);
         toast.error("Failed to fetch habits. Please check the server or network.", {
           position: "top-center",
         });
       }
     };
-  
+
     fetchHabits();
   }, []);
-  
 
-  // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewHabit((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Add new habit
   const handleAddHabit = async (e) => {
     e.preventDefault();
-
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      toast.error("Authentication token is missing!", { position: "top-center" });
-      return;
-    }
-
     try {
       const response = await axios.post(
         "http://localhost:8800/api/habit/add",
         newHabit,
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
           withCredentials: true,
         }
       );
       toast.success(response.data, { position: "top-center" });
 
-      // Reset the form fields
       setNewHabit({
         habit_name: "",
         description: "",
@@ -87,9 +62,6 @@ const Dashboard = () => {
 
       // Refresh habits after adding
       const updatedHabits = await axios.get("http://localhost:8800/api/habit", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
         withCredentials: true,
       });
       const habitsByCategory = updatedHabits.data.reduce((acc, habit) => {
@@ -103,27 +75,20 @@ const Dashboard = () => {
     }
   };
 
-  // Delete habit
   const handleDeleteHabit = async (habitId, category) => {
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      toast.error("Authentication token is missing!", { position: "top-center" });
-      return;
-    }
-
     try {
       await axios.delete(`http://localhost:8800/api/habit/delete/${habitId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
         withCredentials: true,
       });
       toast.success("Habit deleted successfully!", { position: "top-center" });
 
-      // Update habits state
       setHabits((prevHabits) => {
         const updatedCategory = prevHabits[category].filter((habit) => habit.hid !== habitId);
+        if (updatedCategory.length === 0) {
+          const updatedHabits = { ...prevHabits };
+          delete updatedHabits[category]; // Remove empty category
+          return updatedHabits;
+        }
         return {
           ...prevHabits,
           [category]: updatedCategory,
@@ -188,10 +153,14 @@ const Dashboard = () => {
               <h3>{category}</h3>
               {habits[category].map((habit) => (
                 <div key={habit.hid} className="habit-item">
-                  <p><strong>{habit.habit_name}</strong></p>
-                  <p>{habit.description}</p>
-                  <button onClick={() => handleDeleteHabit(habit.hid, category)}>Delete</button>
-                  <button>Check Off</button>
+                  <div className="habit-details">
+                    <p><strong>{habit.habit_name}</strong></p>
+                    <p>{habit.description}</p>
+                  </div>
+                  <div className="habit-actions">
+                    <button className="delete" onClick={() => handleDeleteHabit(habit.hid, category)}>Delete</button>
+                    <button className="checkoff">Check Off</button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -203,4 +172,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
